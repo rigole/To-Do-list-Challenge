@@ -1,0 +1,73 @@
+.card {
+    position: relative;
+    width: 320px;
+    padding: 40px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.card:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: calc(-100% + 5px);
+    width: 100%;
+    height: 100%;
+    background-color: #00bb77;
+    z-index: 1;
+    transition: 0.5s;
+}
+
+.card:hover:before {
+    bottom: 0;
+}
+
+.content {
+    position: relative;
+    text-transform: capitalize;
+    color: #777;
+    z-index: 2;
+    transition: 0.5s
+}
+
+h2{
+    margin-bottom: 10px;
+    margin-top: 0;
+    font-size: 30px;
+}
+
+p {
+    font-size: 18px;
+}
+
+.card:hover .content{
+    color: white;
+}
+
+.task-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.option-list{
+    display: flex;
+    justify-content: space-around;
+    visibility: hidden;
+  
+}
+
+
+.card:hover .option-list{
+    visibility: visible;
+}
+
+
+.creation-date{
+    margin-top: 0.5rem;
+}
+
