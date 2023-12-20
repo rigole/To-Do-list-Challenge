@@ -54,6 +54,25 @@ p {
     gap: 30px;
 }
 
+.task-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.input-search{
+    width: 600px;
+    height: 40px;
+    border-radius: 12px;
+    padding:  0.6rem 0.2rem 0.6rem 2.5rem;
+    margin: 2rem;
+    font-family: 'Comfortaa';
+    background: #fff url("https://img.icons8.com/ios/25/search--v1.png") no-repeat 13px;
+}
+
 .option-list{
     display: flex;
     justify-content: space-around;
