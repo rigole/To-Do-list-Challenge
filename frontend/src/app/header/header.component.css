@@ -1,0 +1,27 @@
+.navbar-brand{
+    height: 65px;
+}
+
+.form-inline{
+   
+    display: flex;
+    
+}
+
+.btn{
+    margin: 0.52rem;
+}
+
+.task-button{
+    width: 500px;
+}
+
+/*
+.user-button {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+*/
