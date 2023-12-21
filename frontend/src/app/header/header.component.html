@@ -13,10 +13,74 @@
         </ul>
       </div>
 
-      <ul class="">
-        <button class="btn btn-outline-success">Sign Up</button>
-        <button class="btn btn-outline-success">Sign In</button>
+
+
+
+      <ul *ngIf="!isLoggedIn; else welcomeTemplate" class="">
+        <button class="btn btn-outline-success"  data-toggle="modal" data-target="#signupmodal">Sign Up</button>
+        <button class="btn btn-outline-success" data-toggle="modal" data-target="#signinmodal">Sign In</button>
       </ul>
+
+      <ng-template #welcomeTemplate>
+        <li>Welcome! You are now connected. </li>
+        <li><button class="btn btn-outline-danger" (click)="signOut()">Sign Out</button></li>
+      </ng-template>
     
    </div>
   </nav>
+
+
+  <div class="modal fade" id="signupmodal" tabindex="-1" role="dialog" aria-labelledby="signupmodal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="signupmodaltitle">Sign Up</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+        <form action=""  [formGroup]="registerForm" (ngSubmit)="subscribe()">
+          <div class="modal-body">
+            <app-input [control]="name"  type="text" placeholder="enter Your name"></app-input>
+            <app-input [control]="email" type="email" placeholder="enter Your email"></app-input>
+            <app-input [control]="password" type="password" placeholder="enter Your password"></app-input>
+          </div>
+          <p class="text-center" id="signupResponse"></p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            <button  type="submit" class="btn btn-outline-success">Sign Up</button>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  
+  <div class="modal fade" id="signinmodal" tabindex="-1" role="dialog" aria-labelledby="signinmodal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="signinmodaltitle">Sign In</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="" [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="modal-body">
+            <app-input [control]="emailLogin" type="text" placeholder="enter Your email"></app-input>
+            <app-input [control]="passwordLogin" type="password" placeholder="enter Your password"></app-input>
+          </div>
+          <p class="text-center" id="signinResponse"></p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            <button  type="submit" class="btn btn-outline-success">Sign In</button>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>

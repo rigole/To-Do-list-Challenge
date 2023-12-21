@@ -16,12 +16,11 @@
     width: 500px;
 }
 
-/*
-.user-button {
-    align-items: flex-start;
-    display: flex;
-    justify-content: space-evenly;
-    
+#signupmodaltitle{
+    color: black;
 }
 
-*/
+#signinmodaltitle{
+    color: black;
+}
+
