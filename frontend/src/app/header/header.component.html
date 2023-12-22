@@ -8,7 +8,13 @@
       <div class="form-inline">
         <ul class="">
           <li class="task-button">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add a Task</button>
+            <div *ngIf="!userInfo; else TaskButton" class="">
+              <button class="btn btn-outline-success " disabled title="Sign up or Singin to add a task"  data-toggle="modal" data-target="#taskmodal" >Add a Task</button>
+            </div>
+            <ng-template  #TaskButton>
+              <p>Hello</p>
+              <button class="btn btn-outline-success my-2 my-sm-0"  data-toggle="modal" data-target="#taskmodal" >Add a Task</button>
+            </ng-template>
           </li>
         </ul>
       </div>
@@ -16,13 +22,13 @@
 
 
 
-      <ul *ngIf="!isLoggedIn; else welcomeTemplate" class="">
+      <ul *ngIf="!userInfo; else welcomeTemplate" class="">
         <button class="btn btn-outline-success"  data-toggle="modal" data-target="#signupmodal">Sign Up</button>
         <button class="btn btn-outline-success" data-toggle="modal" data-target="#signinmodal">Sign In</button>
       </ul>
 
       <ng-template #welcomeTemplate>
-        <li>Welcome! You are now connected. </li>
+        <p id="welcomeMessage">Welcome! You are now connected. </p>
         <li><button class="btn btn-outline-danger" (click)="signOut()">Sign Out</button></li>
       </ng-template>
     
@@ -78,6 +84,34 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
             <button  type="submit" class="btn btn-outline-success">Sign In</button>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="taskmodal" tabindex="-1" role="dialog" aria-labelledby="taskmodal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="taskmodaltitle">Add a task</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+     
+        <form action="" [formGroup]="taskForm" (ngSubmit)="addTask()">
+          <div class="modal-body">
+            <app-input [control]="title" type="text" placeholder="enter the title of the task"></app-input>
+            <app-input [control]="category" type="text" placeholder="enter the category of the task"></app-input>
+            <textarea id="textarea" placeholder="enter the description of the task"></textarea>
+          </div>
+          <p class="text-center" id="taskResponse"></p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            <button  type="submit" class="btn btn-outline-success">Add the task</button>
           </div>
         </form>
         

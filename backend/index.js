@@ -8,37 +8,54 @@ app.use(cors())
 app.use(bodyParser.json())
 const PORT = process.env.PORT || 3000
 
-app.get('/api/data/', async (req, res) => {
+app.get('/api/data/:userId',  async (req, res) => {
+    
+    const userId = req.params.userId;
+    console.log(userId);
 
-try{
-// Fetch data from the database
-    const [rows, fields] = await db.execute('SELECT * FROM user');
-    const data = rows;
-
-// Send data as JSON response
-    res.json(data);
-} 
- catch (error ){
-    console.error('Error fetching data:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-}
-
+    if (userId) {
+      try {
+        const [rows] = await db.execute('SELECT * FROM task WHERE user_id = ?', [userId]);
+        res.json(rows);
+      } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    } else {
+      res.status(400).json({ error: 'User ID is required' });
+    }
 })
+
 
 
 app.post('/api/signup/', async (req, res) => {
     const { name, email, password} = req.body;
 
     try {
-        await db.execute('INSERT INTO user (name, email, password) VALUES (?, ?, ?)', [name, email, password])
-        res.json({ success: true, message: 'Registration Successfull' });
+        const [result] =  await db.execute('INSERT INTO user (name, email, password) VALUES (?, ?, ?)', [name, email, password])
+        const userId = result.insertId;
+        res.json({ success: true, message: 'Registration Successfull', userId});
 
     } catch (error) {
-
         console.log('Error of registration ', error)
         res.status(500).json({ success: false, message: 'Internal error server'})
     }
 });
+
+app.post('/api/data/', async (req, res) => {
+    
+    const { title, description, category, userId } = req.body
+    
+    try{
+        await db.execute('INSERT INTO task (title, description, category, user_id) VALUES (?, ?, ?, ?)', [title, description, category, userId])
+        res.json({ success: true, message: 'Task Added'});
+    } catch(error){
+        console.log(error)
+    }
+
+})
+
+
 
 app.post('/api/signin/', async (req, res) => {
     const { email, password } = req.body;
@@ -46,7 +63,8 @@ app.post('/api/signin/', async (req, res) => {
     try {
         const [login] = await db.execute('SELECT *  FROM user WHERE email = ? AND password = ?', [email, password])
         if (login.length> 0) {
-            res.json({success:true, message: 'Successfull Login'})
+            const user = login[0]
+            res.json({success:true, message: 'Successfull Login', userId: user.user_id})
         }
         else {
             res.json({ success: false, message: 'Invalid username or password' });

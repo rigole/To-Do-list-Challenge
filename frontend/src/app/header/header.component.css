@@ -24,3 +24,20 @@
     color: black;
 }
 
+#addingTaskError{
+    color: black;
+}
+#welcomeMessage{
+    color: black;
+}
+
+textarea{
+    width: 400px;
+    height: 150px;
+    margin-left: 1rem;
+}
+
+#taskmodaltitle{
+    color: black;
+}
+
