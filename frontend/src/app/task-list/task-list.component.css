@@ -50,8 +50,9 @@ p {
 
 .task-list{
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
     margin: 0.5rem;
 }
 
@@ -91,3 +92,25 @@ p {
     margin-top: 0.5rem;
 }
 
+#addTaskMessage{
+    font-size: 24px;
+    color: white;
+    font-weight: bolder;
+}
+
+
+
+@media screen and (max-width: 375px) {
+    .task-list{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0.5rem;
+    }
+
+    .task-section {
+        width: 100%;
+    }
+}

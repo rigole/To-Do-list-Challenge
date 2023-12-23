@@ -13,7 +13,7 @@ export class HeaderComponent  implements OnInit {
   userId = 0
   textAreaValue:any = ''
 
-  @ViewChild('description') description: any;
+  
 
   userInfo = false
   constructor(private authService: AuthService){
@@ -125,6 +125,7 @@ isAuthenticated(): boolean {
 signOut(){
   this.userInfo = false
   localStorage.removeItem('userInfo')
+  localStorage.removeItem('usertoken')
 
 }
 
@@ -132,12 +133,18 @@ addTask(){
   const usertoken = localStorage.getItem("usertoken")
   const userNumber = Number(usertoken)
   const textAreaValue = <HTMLInputElement>document.getElementById("textarea");
-  
+
   this.authService.addTask(this.title.value,textAreaValue.value,this.category.value, userNumber).subscribe(response => {
     const reponseMessage = <HTMLInputElement>document.getElementById("taskResponse")
     reponseMessage.innerHTML = response.message
     reponseMessage.style.color = 'black'
   })
+}
+
+getAllTask(){
+  const usertoken = localStorage.getItem("usertoken")
+  const userNumber = Number(usertoken)
+  return this.authService.getAllTask(userNumber)
 }
 
 

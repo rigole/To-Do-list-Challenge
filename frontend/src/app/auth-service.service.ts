@@ -28,6 +28,22 @@ export class AuthService{
       return this.http.post(`${this.backendUrl}/api/data/`, {title, description, category, userId});
     }
 
+    getAllTask(userId:any):Observable<any>{
+      return this.http.get(`${this.backendUrl}/api/data/${userId}`);
+    }
+
+    getTaskById(taskId:any):Observable<any>{
+      return this.http.get(`${this.backendUrl}/api/task/${taskId}`);
+    }
+
+    updateTask(taskId:any, updateTask: any): Observable<any>{
+      return this.http.put<any>(`${this.backendUrl}/api/task/${taskId}`, updateTask);
+    }
+
+    deleteTask(taskId: any): Observable<any> {
+      return this.http.delete<any>(`${this.backendUrl}/api/task/${taskId}`);
+    }
+
 
     
     

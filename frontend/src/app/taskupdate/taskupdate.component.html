@@ -1,0 +1,27 @@
+
+
+<div class="taskDetailContainer" *ngIf="task">
+    <div class="card">
+        <div class="content">
+            <form action="" >
+                <div class="form-group">
+                    <label for="">title:</label>
+                    <input name="title" id="title" class="form-control" value="{{ task.title }}" />
+                    <label for="">category:</label>
+                    <input id="category" name="category" class="form-control" value="{{ task.category }}" />
+                    <label for="">description</label>
+                    <textarea name="description" id="description"> 
+                        {{ task.description }}
+                    </textarea>
+                    <p id="taskAdded"></p>
+                    <div class="option-list ">
+                        <button id="editTaskButton" (click)="updateTask()" type="button" class="btn btn-outline-success">Update the task</button>
+                        <button id="deleteTaskButton" (click)="deleteTask()" type="button" class="btn btn-outline-danger">Delete the task</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
