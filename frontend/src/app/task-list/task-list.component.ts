@@ -13,6 +13,8 @@ export class TaskListComponent implements OnInit {
   usertoken: any
   data : any [] = []
   userInfo = false
+  filteredItems: any[] = [];
+  filterText: string = '';
 
   showOption(){
     this.isHidden = true;
@@ -29,8 +31,18 @@ export class TaskListComponent implements OnInit {
     const userNumber = Number(this.usertoken)
     this.authService.getAllTask(userNumber).subscribe(response => {
      this.data = response
+     this.applyFilter()
     
     })
+
+    
+  }
+
+  applyFilter(){
+    // Perform the filtering based on the filterText
+    this.filteredItems = this.data.filter(item =>
+      item.title.toLowerCase().includes(this.filterText.toLowerCase())
+    );
   }
 
 

@@ -1,11 +1,11 @@
 <section class="task-section">
-    <div class="task-search">
-        <input type="search" class="input-search" placeholder="Search a task">
+    <div *ngIf="userInfo; " class="task-search">
+        <input type="search" [(ngModel)]="filterText" (input)="applyFilter()" class="input-search" placeholder="Search a task by title ">
     </div>
 
     <div *ngIf="userInfo; else addTaskMessage"  class="task-list">
     
-        <div class="card " *ngFor=" let task of data ">
+        <div class="card " *ngFor=" let task of filteredItems ">
             <div class="content">
                 <h2>{{ task.title }}</h2>
                 <p>{{ task.category }}</p>
@@ -13,7 +13,7 @@
                     {{ task.description }}
                 </p>
                 <div class="option-list" >
-                   <a [routerLink]="['/task', task.id]"> <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/pencil--v3.png" alt="pencil--v3"/></a>
+                   <a [routerLink]="['/task', task.id]"> <img width="24" height="24" title="Edit or delete this task" src="https://img.icons8.com/material-outlined/24/pencil--v3.png" alt="pencil--v3"/></a>
                     <span class="creation-date" title="date of edition">edited: {{ task.updated_at | date:'short' }}</span>
                 </div>
                 
