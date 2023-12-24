@@ -129,6 +129,8 @@ signOut(){
 
 }
 
+//Handle the button to add tasks
+
 addTask(){
   const usertoken = localStorage.getItem("usertoken")
   const userNumber = Number(usertoken)
@@ -141,6 +143,7 @@ addTask(){
   })
 }
 
+//Handle the button to list all the tasks
 getAllTask(){
   const usertoken = localStorage.getItem("usertoken")
   const userNumber = Number(usertoken)

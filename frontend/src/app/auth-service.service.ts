@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-
+// Service class with methods
 export class AuthService{
 
   private backendUrl = 'http://localhost:3000';
